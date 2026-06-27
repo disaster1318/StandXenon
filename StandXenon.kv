@@ -1,0 +1,223 @@
+<MainMenu>:
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: 0.15
+            Label:
+                id: nick_label
+                text: "Игрок"
+                font_size: 24
+            Label:
+                id: level_label
+                text: "LVL 1"
+                font_size: 20
+            Label:
+                id: gold_label
+                text: "G 0"
+                font_size: 20
+        GridLayout:
+            cols: 2
+            Button:
+                text: "Профиль"
+                on_press: root.manager.current = 'profile'
+            Button:
+                text: "Друзья"
+                on_press: root.manager.current = 'friends'
+            Button:
+                text: "Инвентарь"
+                on_press: root.manager.current = 'inventory'
+            Button:
+                text: "Магазин"
+                on_press: root.manager.current = 'shop'
+            Button:
+                text: "Рынок"
+                on_press: root.manager.current = 'market'
+            Button:
+                text: "Настройки"
+                on_press: root.manager.current = 'settings'
+        Button:
+            text: "ИГРАТЬ"
+            size_hint_y: 0.15
+            on_press: root.manager.current = 'modes'
+
+<ProfileScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "СТАТИСТИКА"
+            font_size: 30
+        Label:
+            id: stats_kd
+            text: "К/Д: 0.00"
+        Label:
+            id: stats_kills
+            text: "Убийств: 0"
+        Label:
+            id: stats_deaths
+            text: "Смертей: 0"
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<FriendsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "ДРУЗЬЯ"
+            font_size: 30
+        BoxLayout:
+            size_hint_y: 0.1
+            TextInput:
+                id: search_input
+                hint_text: "Введите ID друга"
+            Button:
+                text: "Найти"
+                on_press: root.find_friend()
+        Label:
+            id: result_label
+            text: ""
+        ScrollView:
+            GridLayout:
+                id: friends_list
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: 40
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<InventoryScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "ИНВЕНТАРЬ"
+            font_size: 30
+        ScrollView:
+            GridLayout:
+                id: inventory_grid
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<ShopScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "МАГАЗИН"
+            font_size: 30
+        ScrollView:
+            GridLayout:
+                id: shop_grid
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+        Label:
+            id: status_label
+            text: ""
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<MarketScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "РЫНОК"
+            font_size: 30
+        ScrollView:
+            GridLayout:
+                id: market_list
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<SettingsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "НАСТРОЙКИ"
+            font_size: 30
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<ModeSelectScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "ВЫБЕРИТЕ РЕЖИМ"
+            font_size: 30
+        GridLayout:
+            cols: 2
+            Button:
+                text: "КОМАНДНЫЙ БОЙ"
+                on_press: root.manager.current = 'load'
+            Button:
+                text: "СОРЕВНОВАТЕЛЬНЫЙ\n(20 лвл)"
+                disabled: True
+            Button:
+                text: "СОЮЗНИКИ\n(15 лвл)"
+                disabled: True
+            Button:
+                text: "ДУЭЛЬ\n(10 лвл)"
+                disabled: True
+        Button:
+            text: "Назад"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
+
+<LoadScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "Добро пожаловать!"
+            font_size: 24
+        Label:
+            id: tip_label
+            text: "Загрузка..."
+            font_size: 20
+        Label:
+            text: "Запуск сервера..."
+        Button:
+            text: "ОТМЕНА"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'modes'
+
+<BattleScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: team_label
+            text: "Выберите команду"
+            font_size: 24
+        BoxLayout:
+            size_hint_y: 0.15
+            Button:
+                text: "CT (Оборона)"
+                on_press: root.select_ct()
+            Button:
+                text: "T (Атака)"
+                on_press: root.select_t()
+        Label:
+            id: round_status
+            text: ""
+        Label:
+            id: gold_label
+            text: "G 0"
+        Button:
+            text: "Выйти"
+            size_hint_y: 0.1
+            on_press: root.manager.current = 'main'
